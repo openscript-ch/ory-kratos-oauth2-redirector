@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to {{.provider}}</title>
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const redirectForm = document.getElementById("redirect-form");
+        redirectForm.submit();
+      });
+    </script>
+  </head>
+
+  <body>
+    <form id="redirect-form" method="POST" action="{{.endpoint}}?flow={{.flow}}">
+      <input type="hidden" name="csrf_token" value="{{.csrf_token}}" />
+      <input type="hidden" name="provider" value="{{.provider}}" />
+    </form>
+  </body>
+
+</html>
