@@ -15,3 +15,4 @@ docker pull ghcr.io/openscript-ch/ory-kratos-oauth2-redirector:latest
 | Name | Description | Default |
 |---|---|---|
 | `PORT` | Listning port of this service for HTTP requests | `3000` |
+| `ENDPOINT` | Endpoint which initiates the OAuth2 process | - |
