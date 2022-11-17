@@ -16,6 +16,7 @@ type configuration struct {
 
 func (c *configuration) load() {
 	c.port = os.Getenv("PORT")
+	c.endpoint = os.Getenv("ENDPOINT")
 }
 
 func (c *configuration) display() {
