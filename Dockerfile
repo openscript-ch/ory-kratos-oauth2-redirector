@@ -12,6 +12,7 @@ FROM scratch
 ENV PORT=3000
 ENV REDIRECT_SESSION_PARAM_KEY=ory_kratos_session
 ENV SESSION_COOKIE_KEY=ory_kratos_session
+COPY ./views /views
 COPY --from=builder /go/bin/ory-kratos-oauth2-redirector /go/bin/ory-kratos-oauth2-redirector
 EXPOSE $PORT
 ENTRYPOINT ["/go/bin/ory-kratos-oauth2-redirector"]
