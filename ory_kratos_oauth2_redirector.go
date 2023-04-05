@@ -10,20 +10,23 @@ import (
 )
 
 type configuration struct {
-	port     string
-	endpoint string
+	port                 string
+	loginEndpoint        string
+	registrationEndpoint string
 }
 
 func (c *configuration) load() {
 	c.port = os.Getenv("PORT")
-	c.endpoint = os.Getenv("ENDPOINT")
+	c.loginEndpoint = os.Getenv("LOGIN_ENDPOINT")
+	c.registrationEndpoint = os.Getenv("REGISTRATION_ENDPOINT")
 }
 
 func (c *configuration) display() {
 	fmt.Println(
 		"Configuration:\n##############",
 		"\nPORT: ", c.port,
-		"\nENDPOINT: ", c.endpoint,
+		"\nLOGIN_ENDPOINT: ", c.loginEndpoint,
+		"\nREGISTRATION_ENDPOINT: ", c.registrationEndpoint,
 	)
 }
 
@@ -40,11 +43,18 @@ func main() {
 	})
 
 	app.Get("/", func(ctx *fiber.Ctx) error {
+		endpoint := c.loginEndpoint
+
+		if ctx.Query("traits") != "" {
+			endpoint = c.registrationEndpoint
+		}
+
 		return ctx.Render("index", fiber.Map{
-			"endpoint":   c.endpoint,
+			"endpoint":   endpoint,
 			"provider":   ctx.Query("provider"),
 			"csrf_token": ctx.Query("csrf_token"),
 			"flow":       ctx.Query("flow"),
+			"traits":     ctx.Query("traits"),
 		})
 	})
 
