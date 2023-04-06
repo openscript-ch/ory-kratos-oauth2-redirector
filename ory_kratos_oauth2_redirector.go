@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"net/url"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
@@ -45,7 +46,9 @@ func main() {
 	app.Get("/", func(ctx *fiber.Ctx) error {
 		endpoint := c.loginEndpoint
 
-		if ctx.Query("traits") != "" {
+		traits, traitsErr := url.QueryUnescape(ctx.Query("traits"))
+
+		if traits != "" && traitsErr == nil {
 			endpoint = c.registrationEndpoint
 		}
 
@@ -54,7 +57,7 @@ func main() {
 			"provider":   ctx.Query("provider"),
 			"csrf_token": ctx.Query("csrf_token"),
 			"flow":       ctx.Query("flow"),
-			"traits":     ctx.Query("traits"),
+			"traits":     traits,
 		})
 	})
 
