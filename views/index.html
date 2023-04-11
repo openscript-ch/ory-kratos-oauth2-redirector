@@ -18,9 +18,9 @@
     <form id="redirect-form" method="POST" action="{{.endpoint}}?flow={{.flow}}">
       <input type="hidden" name="csrf_token" value="{{.csrf_token}}" />
       <input type="hidden" name="provider" value="{{.provider}}" />
-      {{if .traits}}
-      <input type="hidden" name="traits" value="{{.traits}}" />
-      {{end}}
+      {{- range $key, $value := .traits }}
+      <input type="hidden" name="traits.{{$key}}" value="{{$value}}">
+      {{- end }}
     </form>
   </body>
 

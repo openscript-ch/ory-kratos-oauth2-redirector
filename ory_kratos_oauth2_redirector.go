@@ -1,28 +1,28 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
-	"net/url"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html"
 )
 
-type configuration struct {
+type Configuration struct {
 	port                 string
 	loginEndpoint        string
 	registrationEndpoint string
 }
 
-func (c *configuration) load() {
+func (c *Configuration) load() {
 	c.port = os.Getenv("PORT")
 	c.loginEndpoint = os.Getenv("LOGIN_ENDPOINT")
 	c.registrationEndpoint = os.Getenv("REGISTRATION_ENDPOINT")
 }
 
-func (c *configuration) display() {
+func (c *Configuration) display() {
 	fmt.Println(
 		"Configuration:\n##############",
 		"\nPORT: ", c.port,
@@ -32,7 +32,7 @@ func (c *configuration) display() {
 }
 
 func main() {
-	c := &configuration{}
+	c := &Configuration{}
 	c.load()
 	c.display()
 
@@ -46,10 +46,15 @@ func main() {
 	app.Get("/", func(ctx *fiber.Ctx) error {
 		endpoint := c.loginEndpoint
 
-		traits, traitsErr := url.QueryUnescape(ctx.Query("traits"))
+		var traits map[string]interface{}
 
-		if traits != "" && traitsErr == nil {
+		if ctx.Query("traits") != "" {
 			endpoint = c.registrationEndpoint
+			traitsErr := json.Unmarshal([]byte(ctx.Query("traits")), &traits)
+
+			if traitsErr != nil {
+				return ctx.SendStatus(400)
+			}
 		}
 
 		return ctx.Render("index", fiber.Map{
