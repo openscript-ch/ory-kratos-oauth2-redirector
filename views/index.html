@@ -21,6 +21,9 @@
       {{- range $key, $value := .traits }}
       <input type="hidden" name="traits.{{$key}}" value="{{$value}}">
       {{- end }}
+      {{- range $key, $value := .upstream_parameters }}
+      <input type="hidden" name="upstream_parameters.{{$key}}" value="{{$value}}">
+      {{- end }}
     </form>
   </body>
 

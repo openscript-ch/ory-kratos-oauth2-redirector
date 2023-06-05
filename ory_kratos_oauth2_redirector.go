@@ -47,7 +47,6 @@ func main() {
 		endpoint := c.loginEndpoint
 
 		var traits map[string]interface{}
-
 		if ctx.Query("traits") != "" {
 			endpoint = c.registrationEndpoint
 			traitsErr := json.Unmarshal([]byte(ctx.Query("traits")), &traits)
@@ -57,12 +56,23 @@ func main() {
 			}
 		}
 
+		var upstreamParameters map[string]interface{}
+		if ctx.Query("upstream_parameters") != "" {
+			endpoint = c.registrationEndpoint
+			upstreamParametersErr := json.Unmarshal([]byte(ctx.Query("upstream_parameters")), &upstreamParameters)
+
+			if upstreamParametersErr != nil {
+				return ctx.SendStatus(400)
+			}
+		}
+
 		return ctx.Render("index", fiber.Map{
-			"endpoint":   endpoint,
-			"provider":   ctx.Query("provider"),
-			"csrf_token": ctx.Query("csrf_token"),
-			"flow":       ctx.Query("flow"),
-			"traits":     traits,
+			"endpoint":            endpoint,
+			"provider":            ctx.Query("provider"),
+			"csrf_token":          ctx.Query("csrf_token"),
+			"flow":                ctx.Query("flow"),
+			"traits":              traits,
+			"upstream_parameters": upstreamParameters,
 		})
 	})
 
