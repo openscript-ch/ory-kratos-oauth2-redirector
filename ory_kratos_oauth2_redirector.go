@@ -58,7 +58,6 @@ func main() {
 
 		var upstreamParameters map[string]interface{}
 		if ctx.Query("upstream_parameters") != "" {
-			endpoint = c.registrationEndpoint
 			upstreamParametersErr := json.Unmarshal([]byte(ctx.Query("upstream_parameters")), &upstreamParameters)
 
 			if upstreamParametersErr != nil {

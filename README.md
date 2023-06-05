@@ -32,7 +32,7 @@ docker pull ghcr.io/openscript-ch/ory-kratos-oauth2-redirector:latest
 
 - **Login**: `http://localhost:3000?provider=google&csrf_token=S9qg1Y2EZZ2vghjFAnXtDV2VTosrGFAe/XdOmlyD9MQyB+K/2g9FrtpkMe40/yJ8lOCuFDQHXbVitbR5iIsRtw==&flow=56dfcc4a-95af-41c6-876f-93b9c75f9e29`
 - **With traits**: `http://localhost:3000?oauth2?provider=google&csrf_token=92kMiSR3SQ/gkipWWeW6kXMwExTMwCUWIveiNwzD4JUSvyjk1WBzCgZTneaFRBTxXzS/jpQirg+uZnfri31NDw==&flow=497d988d-167a-4588-9821-38f4863addb1&traits=%7B%22lang%22%3A%22en%22%2C%22tac%22%3A%221681216465715%22%2C%22dp%22%3A%221681216465715%22%7D`
-- **With traits and upstream_parameters**: `http://localhost:3000?oauth2?provider=google&csrf_token=92kMiSR3SQ/gkipWWeW6kXMwExTMwCUWIveiNwzD4JUSvyjk1WBzCgZTneaFRBTxXzS/jpQirg+uZnfri31NDw==&flow=497d988d-167a-4588-9821-38f4863addb1&traits=%7B%22lang%22%3A%22en%22%2C%22tac%22%3A%221681216465715%22%2C%22dp%22%3A%221681216465715%22%7D&upstream_parameters=%7B%22prompt%22%3A%22select_account%22%7D`
+- **With traits and upstream_parameters**: `http://localhost:3000?provider=google&csrf_token=92kMiSR3SQ/gkipWWeW6kXMwExTMwCUWIveiNwzD4JUSvyjk1WBzCgZTneaFRBTxXzS/jpQirg+uZnfri31NDw==&flow=497d988d-167a-4588-9821-38f4863addb1&traits=%7B%22lang%22%3A%22en%22%2C%22tac%22%3A%221681216465715%22%2C%22dp%22%3A%221681216465715%22%7D&upstream_parameters=%7B%22prompt%22%3A%22select_account%22%7D`
 
 ## Development
 
